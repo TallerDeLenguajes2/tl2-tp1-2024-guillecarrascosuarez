@@ -1,0 +1,14 @@
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.exe
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.deps.json
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.runtimeconfig.json
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.dll
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.pdb
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.AssemblyInfoInputs.cache
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.AssemblyInfo.cs
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.dll
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\refint\tl2-tp1-2024-guillecarrascosuarez.dll
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.pdb
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.genruntimeconfig.cache
+C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\ref\tl2-tp1-2024-guillecarrascosuarez.dll
