@@ -1,30 +1,22 @@
+using System.Runtime.CompilerServices;
+
 public class Cliente
 {
     private string nombre;
     private string direccion;
     private string telefono;
-    private string datosReferenciaDireccion;
+    private string datosReferenciasDireccion;
 
-    public string Nombre { get; set; }
-    public string Direccion { get; set; }
-    public string Telefono { get; set; }
-    public string DatosReferenciaDireccion { get; set; }
-
-    public Cliente(string nombre, string direccion, string telefono, string datosReferenciaDireccion)
+    public Cliente(string nombre, string direccion, string telefono, string referencias)
     {
-        Nombre = nombre;
-        Direccion = direccion;
-        Telefono = telefono;
-        DatosReferenciaDireccion = datosReferenciaDireccion;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        datosReferenciasDireccion = referencias;
     }
 
-    public void VerTelefonoCliente()
-    {
-        Console.WriteLine($"Teléfono del cliente: {telefono}");
-    }
-
-    public void VerDatosReferenciaDireccion()
-    {
-        Console.WriteLine($"Referencia de la dirección: {DatosReferenciaDireccion}");
-    }
+    public string Nombre { get => nombre;}
+    public string Direccion { get => direccion; }
+    public string Telefono { get => telefono;}
+    public string DatosReferenciasDireccion { get => datosReferenciasDireccion;}
 }

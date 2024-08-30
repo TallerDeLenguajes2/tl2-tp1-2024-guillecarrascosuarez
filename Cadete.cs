@@ -1,49 +1,53 @@
+using System.Reflection;
+
 public class Cadete
 {
     private int id;
     private string nombre;
     private string direccion;
     private string telefono;
-    private List<Pedido> listadoPedidos;
-    private double jornalACobrar;
+    private List<Pedido> pedidos;
 
-    public int Id { get; private set; }
-    public string Nombre { get; set; }
-    public string Direccion { get; set; }
-    public string Telefono { get; set; }
-    public List<Pedido> ListadoPedidos { get; set; }
-    public double JornalACobrar { get; set; }
 
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
-        Id = id;
-        Nombre = nombre;
-        Direccion = direccion;
-        Telefono = telefono;
-        ListadoPedidos = new List<Pedido>();
-        JornalACobrar = 0;
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        pedidos = new List<Pedido>();
     }
 
-    public void AsignarPedido(Pedido pedido)
-    {
-        ListadoPedidos.Add(pedido);
-    }
+    public int Id { get => id;}
+    public string Nombre { get => nombre; }
+    public string Direccion { get => direccion; }
+    public string Telefono { get => telefono; }
+    public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
+   
 
-    public void ReasignarPedido(Cadete nuevoCadete, Pedido pedido)
+    public int CantidadDePedidosCompletados()
     {
-        ListadoPedidos.Remove(pedido);
-        nuevoCadete.AsignarPedido(pedido);
+        return pedidos.Count(p => p.Estado == Estados.Entregado);
     }
-
-    public void GenerarInforme()
+    public int JornalACobrar()
     {
-        int pedidosEntregados = ListadoPedidos.Count(p => p.Estado == "Entregado");
-        JornalACobrar = pedidosEntregados * 500;
-        Console.WriteLine($"Cadete: {nombre}, Jornal a cobrar: ${JornalACobrar}, Pedidos entregados: {pedidosEntregados}");
+        return 500 * CantidadDePedidosCompletados();
+
     }
-
-    public List<Pedido> ObtenerListadoPedidos()
+    public Pedido DarDeBajaPedido(int numero)
     {
-        return ListadoPedidos;
+       var pedidoAQuitar = Pedidos.Where(p => p.Numero == numero).ToList();
+       Pedidos.Remove(pedidoAQuitar[0]);
+       return pedidoAQuitar[0];
+    }
+    public void RetirarPedido(int numero)
+    {
+        var pedidoAQuitar = Pedidos.Where(p => p.Numero == numero).ToList();
+        pedidoAQuitar[0].Estado = Estados.EnCamino;
+    }
+    public void CompletarPedido(int numero)
+    {
+        var pedidoAQuitar = Pedidos.Where(p => p.Numero == numero).ToList();
+        pedidoAQuitar[0].Estado = Estados.Entregado; 
     }
 }
