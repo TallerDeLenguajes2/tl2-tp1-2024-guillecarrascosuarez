@@ -3,21 +3,21 @@ using System.ComponentModel;
 public class Pedido
 {
     private int numero;
-
     private string observacion;
     private Cliente cliente;
 
     private Estados estado;
     public int Numero { get => numero;}
+    public Cadete CadeteAsignado { get; set; }
     public string Observacion { get => observacion;}
     public Estados Estado { get => estado; set => estado = value; }
 
-    public Pedido(int nro, string obs, string nombre, string direcc, string telefono, string referencias)
+    public Pedido(int nro, string obs, Cliente cliente)
     {
         numero = nro;
         observacion = obs;
         Estado = Estados.Preparación;
-        cliente = new Cliente(nombre, direcc, telefono, referencias);
+        this.cliente = cliente;
     }
 
 
@@ -37,3 +37,4 @@ public class Pedido
         Console.WriteLine($"Telefono: {cliente.Telefono}");
     }
 }
+

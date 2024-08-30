@@ -12,3 +12,4 @@ C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\
 C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.pdb
 C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.genruntimeconfig.cache
 C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\ref\tl2-tp1-2024-guillecarrascosuarez.dll
+c:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.sourcelink.json
