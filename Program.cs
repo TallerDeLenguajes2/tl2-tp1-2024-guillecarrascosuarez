@@ -135,7 +135,12 @@ if (existeCSV || existeJSON)
 
             case 4:
                 Console.WriteLine("Final de Jornada - Informe:");
-                cadeteria.MostrarJornalesYEnvios();
+                List<string> informes = cadeteria.ObtenerJornalesYEnvios();
+                
+                foreach (var informe in informes)
+                {
+                    Console.WriteLine(informe);
+                }
                 Console.ReadKey();
                 break;
         }

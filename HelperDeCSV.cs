@@ -139,7 +139,6 @@ public class AccesoJSON
         string ruta = "json/" + nombreArchivo;
         return File.Exists(ruta);
     }
-
     public List<Cadete> LeerCadetes(string nombreArchivo)
     {
         string ruta = "json/" + nombreArchivo;
@@ -159,10 +158,10 @@ public class AccesoJSON
             }
         }
 
-
         var cadetes = JsonSerializer.Deserialize<List<Cadete>>(cadetesJson);
         return cadetes ?? new List<Cadete>();
     }
+
 
     public Cadeteria LeerCadeteria(string nombreArchivo)
     {
@@ -183,8 +182,27 @@ public class AccesoJSON
             }
         }
 
-        var cadeteria = JsonSerializer.Deserialize<Cadeteria>(cadeteriaJson);
-        return cadeteria;
+
+        var cadeteriaInfo = JsonSerializer.Deserialize<CadeteriaSimple>(cadeteriaJson);
+
+        if (cadeteriaInfo != null)
+        {
+
+            var cadetes = LeerCadetes("Cadetes.json");
+
+
+            return new Cadeteria(cadeteriaInfo.Nombre, cadeteriaInfo.Telefono, cadetes);
+        }
+        else
+        {
+            Console.WriteLine("Error al deserializar el archivo JSON.");
+            return null;
+        }
     }
+}
+public class CadeteriaSimple
+{
+    public string Nombre { get; set; }
+    public string Telefono { get; set; }
 }
 }}

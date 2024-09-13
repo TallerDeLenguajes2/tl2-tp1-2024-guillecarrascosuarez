@@ -52,10 +52,8 @@ namespace Sistema
                 }
             } while (string.IsNullOrWhiteSpace(observacionPedido) || string.IsNullOrWhiteSpace(nombreCliente) || string.IsNullOrWhiteSpace(direccCliente) || string.IsNullOrWhiteSpace(telefonoCliente));
 
-            // Crear objeto Cliente
             Cliente clienteNuevo = new Cliente(nombreCliente, direccCliente, telefonoCliente, referenciasCliente);
 
-            // Crear objeto Pedido
             Pedido pedidoNuevo = new Pedido(nroPedido, observacionPedido, clienteNuevo);
             
             return pedidoNuevo;
@@ -76,24 +74,24 @@ namespace Sistema
             }
         }
 
-    public static void MostrarPedidosSinEntregar(Cadeteria cadeteria)
+public static void MostrarPedidosSinEntregar(Cadeteria cadeteria)
+{
+    var pedidosSinEntregar = cadeteria.ListadoPedidos.Where(p => p.Estado != Estados.Entregado).ToList();
+    
+    if (pedidosSinEntregar.Any())
     {
-        var pedidosSinEntregar = cadeteria.ListadoPedidos.Where(p => p.Estado != Estados.Entregado).ToList();
-
-        if (pedidosSinEntregar.Any())
+        foreach (var pedido in pedidosSinEntregar)
         {
-            foreach (var pedido in pedidosSinEntregar)
-            {
-                Console.WriteLine($"Pedido Nro: {pedido.Numero}");
-                Console.WriteLine($"Cadete asignado: {pedido.CadeteAsignado.Nombre}");
-                Funciones.MostrarPedido(pedido);
-            }
-        }
-        else
-        {
-            Console.WriteLine("No hay pedidos sin entregar.");
+            Console.WriteLine($"Pedido Nro: {pedido.Numero}, Estado: {pedido.Estado}, Cadete Asignado: {pedido.CadeteAsignado?.Nombre ?? "No asignado"}");
+            MostrarPedido(pedido);
         }
     }
+    else
+    {
+        Console.WriteLine("No hay pedidos sin entregar.");
+    }
+}
+
 
 
         

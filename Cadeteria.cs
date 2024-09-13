@@ -22,16 +22,28 @@ public class Cadeteria
         this.listadoPedidos = new List<Pedido>();
     }
 
-        public void AsignarPedido(Pedido pedido, int idCadete)
+    public void AsignarPedido(Pedido pedido, int idCadete)
     {
-        
         var cadete = cadetes.FirstOrDefault(c => c.Id == idCadete);
-        if (cadete != null)
+        
+        if (cadete == null)
         {
+            Console.WriteLine("No se encontró un cadete con ese ID.");
+        }
+        else if (pedido.CadeteAsignado == null)
+        {
+        
             pedido.CadeteAsignado = cadete;  
             listadoPedidos.Add(pedido);
+            Console.WriteLine($"Pedido asignado correctamente al cadete {cadete.Nombre}.");
+        }
+        else
+        {
+            Console.WriteLine("El pedido ya está asignado o el cadete no existe.");
         }
     }
+
+
 
     public void CambiarEstadoDelPedido(int numPedido, Estados nuevoEstado)
     {
@@ -39,6 +51,11 @@ public class Cadeteria
         if (pedido != null)
         {
             pedido.Estado = nuevoEstado;
+            Console.WriteLine($"Pedido {numPedido} ha sido actualizado a {pedido.Estado}");
+        }
+        else
+        {
+            Console.WriteLine($"Pedido {numPedido} no encontrado.");
         }
     }
 
@@ -54,25 +71,30 @@ public class Cadeteria
             }
         }
     }
-        public void MostrarJornalesYEnvios()
+    public List<string> ObtenerJornalesYEnvios()
     {
+        List<string> informes = new List<string>();
         int totalEnvios = 0;
         foreach (var cadete in cadetes)
         {
             int pedidosCompletados = listadoPedidos.Count(p => p.CadeteAsignado?.Id == cadete.Id && p.Estado == Estados.Entregado);
             float pago = pedidosCompletados * 500;
-            Console.WriteLine($"{cadete.Nombre} - ${pago}");
+            informes.Add($"{cadete.Nombre} - ${pago}");
             totalEnvios += pedidosCompletados;
         }
         float promedioEnviosPorCadete = cadetes.Count > 0 ? (float)totalEnvios / cadetes.Count : 0;
-        Console.WriteLine($"Total de envíos: {totalEnvios}");
-        Console.WriteLine($"Promedio de envíos completado por cadete: {promedioEnviosPorCadete}");
+        informes.Add($"Total de envíos: {totalEnvios}");
+        informes.Add($"Promedio de envíos completados por cadete: {promedioEnviosPorCadete}");
+        return informes;
     }
         public Pedido DarDeBajaPedido(int numero)
     {
-       var pedidoAQuitar = ListadoPedidos.Where(p => p.Numero == numero).ToList();
-       ListadoPedidos.Remove(pedidoAQuitar[0]);
-       return pedidoAQuitar[0];
+        var pedidoAQuitar = ListadoPedidos.FirstOrDefault(p => p.Numero == numero);
+        if (pedidoAQuitar != null) {
+            ListadoPedidos.Remove(pedidoAQuitar);
+            return pedidoAQuitar;
+        }
+        return null;
     }
     public void RetirarPedido(int numero)
     {
