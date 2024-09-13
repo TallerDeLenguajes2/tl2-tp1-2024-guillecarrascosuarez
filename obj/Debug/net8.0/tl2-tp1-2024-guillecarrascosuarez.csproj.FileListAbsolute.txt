@@ -13,3 +13,6 @@ C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\
 C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.genruntimeconfig.cache
 C:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\ref\tl2-tp1-2024-guillecarrascosuarez.dll
 c:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.sourcelink.json
+c:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\bin\Debug\net8.0\Newtonsoft.Json.dll
+c:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-2024-guillecarrascosuarez.csproj.AssemblyReference.cache
+c:\Users\pc\Desktop\tallerLenguajes\tl2-tp1-2024-guillecarrascosuarez\obj\Debug\net8.0\tl2-tp1-.D9DDBFFD.Up2Date

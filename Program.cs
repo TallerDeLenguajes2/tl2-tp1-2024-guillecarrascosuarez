@@ -1,26 +1,77 @@
 ﻿using Sistema;
-string nombreArchivoCadetes = "Cadetes.csv";
-string nombreArchivoCadeteria = "Cadeteria.csv";
-HelperDeCSV helperCSV = new HelperDeCSV();
-if(helperCSV.Existe(nombreArchivoCadetes) && helperCSV.Existe(nombreArchivoCadeteria))
+using System;
+
+string nombreArchivoCadetes = "Cadetes";
+string nombreArchivoCadeteria = "Cadeteria";
+
+AccesoADatos accesoADatos = null;
+bool existeCSV = false;
+bool existeJSON = false;
+
+do
+{
+    Console.WriteLine("Seleccione el tipo de acceso que desea utilizar:");
+    Console.WriteLine("1 - CSV");
+    Console.WriteLine("2 - JSON");
+    string opcionAcceso = Console.ReadLine();
+
+    if (opcionAcceso == "1")
+    {
+        accesoADatos = new AccesoADatos(); // Instancia para CSV
+        existeCSV = accesoADatos.ExisteCSV($"{nombreArchivoCadetes}.csv") && accesoADatos.ExisteCSV($"{nombreArchivoCadeteria}.csv");
+
+        if (!existeCSV)
+        {
+            Console.WriteLine("No se encontró la información en formato CSV.");
+        }
+    }
+    else if (opcionAcceso == "2")
+    {
+        accesoADatos = new AccesoADatos(); // Instancia para JSON
+        existeJSON = accesoADatos.ExisteJSON($"{nombreArchivoCadetes}.json") && accesoADatos.ExisteJSON($"{nombreArchivoCadeteria}.json");
+
+        if (!existeJSON)
+        {
+            Console.WriteLine("No se encontró la información en formato JSON.");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Opción no válida, por favor elija 1 o 2.");
+    }
+
+} while (accesoADatos == null || (!existeCSV && !existeJSON));
+
+if (existeCSV || existeJSON)
 {
     int operacion;
     int nroPedido = 0;
-    List<Cadete> cadetes = helperCSV.LeerCadetes(nombreArchivoCadetes);
-    List<Pedido> pedidosSinAsignar = new List<Pedido>(); 
-    string[] infoCadeteria = helperCSV.LeerCadeteria(nombreArchivoCadeteria).Split(";");
-    Cadeteria cadeteria = new Cadeteria(infoCadeteria[0], infoCadeteria[1], cadetes);
+
+    List<Cadete> cadetes;
+    Cadeteria cadeteria;
+
+    if (existeCSV)
+    {
+        cadetes = accesoADatos.LeerCadetesCSV($"{nombreArchivoCadetes}.csv");
+        cadeteria = accesoADatos.LeerCadeteriaCSV($"{nombreArchivoCadeteria}.csv");
+    }
+    else
+    {
+        cadetes = accesoADatos.LeerCadetesJSON($"{nombreArchivoCadetes}.json");
+        cadeteria = accesoADatos.LeerCadeteriaJSON($"{nombreArchivoCadeteria}.json");
+    }
+
+    List<Pedido> pedidosSinAsignar = new List<Pedido>();
     do
-    {         
+    {
         Menu menu = new Menu($"Cadeteria {cadeteria.Nombre}-{cadeteria.Telefono}", ["Dar pedido de alta", "Asignar pedido", "Cambiar estado del pedido", "Reasignar pedido", "Cerrar"]);
         operacion = menu.MenuDisplay();
         switch (operacion)
         {
-            
-case 0:
+            case 0:
                 nroPedido++;
                 Pedido pedidoNuevo = Funciones.DarDeAltaPedido(nroPedido);
-                pedidosSinAsignar.Add(pedidoNuevo); // Agregar a la lista de pedidos sin asignar
+                pedidosSinAsignar.Add(pedidoNuevo);
                 Console.WriteLine("Pedido dado de alta y agregado a la lista de pedidos sin asignar.");
                 Console.ReadKey();
                 break;
@@ -31,13 +82,12 @@ case 0:
                     Console.WriteLine("El pedido a asignar es el siguiente:");
                     Funciones.MostrarPedido(pedidosSinAsignar[0]);
 
-                    // Seleccionar cadete para asignar el pedido
                     Console.WriteLine("Seleccione el ID del cadete al cual desea asignar el pedido:");
-                    Funciones.MostrarCadetes(cadetes); // Muestra los cadetes disponibles
+                    Funciones.MostrarCadetes(cadetes);
                     int idCadete = int.Parse(Console.ReadLine());
 
-                    cadeteria.AsignarPedido(pedidosSinAsignar[0], idCadete); // Asignar pedido a un cadete
-                    pedidosSinAsignar.RemoveAt(0); // Remover el pedido de la lista de no asignados
+                    cadeteria.AsignarPedido(pedidosSinAsignar[0], idCadete);
+                    pedidosSinAsignar.RemoveAt(0);
                 }
                 else
                 {
@@ -55,18 +105,17 @@ case 0:
                     num = Console.ReadLine();
                 } while (!int.TryParse(num, out numIngresado));
 
-                // Seleccionar nuevo estado del pedido
                 Console.WriteLine("Seleccione el nuevo estado del pedido:");
-                Funciones.MostrarEstados(); // Muestra los estados disponibles
+                Funciones.MostrarEstados();
                 Estados nuevoEstado = (Estados)Enum.Parse(typeof(Estados), Console.ReadLine());
 
-                cadeteria.CambiarEstadoDelPedido(numIngresado, nuevoEstado); // Cambiar estado del pedido
+                cadeteria.CambiarEstadoDelPedido(numIngresado, nuevoEstado);
                 Console.ReadKey();
                 break;
 
             case 3:
                 Console.WriteLine("Pedidos disponibles para reasignar:");
-                Funciones.MostrarPedidosSinEntregar(cadeteria); // Mostrar pedidos en estado "En camino"
+                Funciones.MostrarPedidosSinEntregar(cadeteria);
 
                 string ingreso;
                 int numPedido;
@@ -76,25 +125,24 @@ case 0:
                     ingreso = Console.ReadLine();
                 } while (!int.TryParse(ingreso, out numPedido));
 
-                // Seleccionar nuevo cadete para reasignar el pedido
                 Console.WriteLine("Seleccione el ID del nuevo cadete al cual desea reasignar el pedido:");
-                Funciones.MostrarCadetes(cadetes); // Muestra los cadetes disponibles
+                Funciones.MostrarCadetes(cadetes);
                 int idNuevoCadete = int.Parse(Console.ReadLine());
 
-                cadeteria.ReasignarPedido(numPedido, idNuevoCadete); // Reasignar el pedido a otro cadete
+                cadeteria.ReasignarPedido(numPedido, idNuevoCadete);
                 Console.ReadKey();
                 break;
 
             case 4:
                 Console.WriteLine("Final de Jornada - Informe:");
-                cadeteria.MostrarJornalesYEnvios(); // Mostrar el informe de la jornada
+                cadeteria.MostrarJornalesYEnvios();
                 Console.ReadKey();
                 break;
         }
 
     } while (operacion != 4);
-}else
-{
-    Console.WriteLine("No se encontró la información de la cadetería");
 }
-
+else
+{
+    Console.WriteLine("No se encontró la información de la cadetería en el formato seleccionado.");
+}
